@@ -1,0 +1,91 @@
+### Explicação do Código JavaScript 
+
+1. `const form = document.getElementById('cadastroForm');`
+   - Seleciona o formulário HTML com o ID `cadastroForm` e armazena na variável `form`. Isso será usado para adicionar um evento de envio.
+
+2. `const tabelaCorpo = document.getElementById('cadastroTableBody');`
+   - Seleciona o corpo da tabela HTML (`<tbody>`) com o ID `cadastroTableBody` e armazena na variável `tabelaCorpo`. É onde os dados dos usuários serão inseridos.
+
+3. `function atualizarTabela() `}`
+   - Define uma função chamada `atualizarTabela`, que vai atualizar o conteúdo da tabela de usuários com os dados salvos.
+
+4. `tabelaCorpo.innerHTML = '';`
+   - Limpa o conteúdo atual da tabela, removendo todas as linhas, para evitar duplicações.
+
+5. `const usuarios = JSON.parse(localStorage.getItem('usuarios')) || [];`
+   - Recupera os dados armazenados no `Local Storage` sob a chave `usuarios`. Se não houver dados, cria um array vazio.
+
+6. `usuarios.forEach(usuario => {`
+   - Itera sobre cada elemento no array `usuarios`, onde cada `usuario` representa um registro de um usuário salvo.
+
+7. `const novaLinha = document.createElement('tr');`
+   - Cria um novo elemento de linha (`<tr>`) para adicionar à tabela.
+
+8. `const celulaNome = document.createElement('td');`
+   - Cria uma nova célula de tabela (`<td>`) para o nome do usuário.
+
+9. `celulaNome.textContent = usuario.nome;`
+   - Define o conteúdo de texto da célula de nome para o valor `nome` do objeto `usuario`.
+
+10. `const celulaEmail = document.createElement('td');`
+    - Cria uma nova célula de tabela para o email do usuário.
+
+11. `celulaEmail.textContent = usuario.email;`
+    - Define o conteúdo de texto da célula de email para o valor `email` do objeto `usuario`.
+
+12. `const celulaSenha = document.createElement('td');`
+    - Cria uma nova célula de tabela para a senha do usuário.
+
+13. `celulaSenha.textContent = '••••••••';`
+    - Define o conteúdo de texto da célula de senha com caracteres mascarados, substituindo a senha real.
+
+14. `novaLinha.appendChild(celulaNome);`
+    - Adiciona a célula de nome à nova linha da tabela.
+
+15. `novaLinha.appendChild(celulaEmail);`
+    - Adiciona a célula de email à nova linha da tabela.
+
+16. `novaLinha.appendChild(celulaSenha);`
+    - Adiciona a célula de senha mascarada à nova linha da tabela.
+
+17. `tabelaCorpo.appendChild(novaLinha);`
+    - Adiciona a nova linha completa ao corpo da tabela.
+
+18. `});`
+    - Finaliza o loop `forEach`, garantindo que todos os usuários sejam adicionados à tabela.
+
+19. `form.addEventListener('submit', function(event) {`
+    - Adiciona um evento ao formulário que é acionado quando o usuário tenta enviar o formulário.
+
+20. `event.preventDefault();`
+    - Evita que a página seja recarregada ao enviar o formulário, permitindo que o script processe os dados.
+
+21. `const nome = document.getElementById('nome').value;`
+    - Recupera o valor inserido no campo de nome do formulário.
+
+22. `const email = document.getElementById('email').value;`
+    - Recupera o valor inserido no campo de email do formulário.
+
+23. `const senha = document.getElementById('senha').value;`
+    - Recupera o valor inserido no campo de senha do formulário.
+
+24. `const usuarios = JSON.parse(localStorage.getItem('usuarios')) || [];`
+    - Recupera a lista de usuários salvos no `Local Storage` ou cria um array vazio se não houver dados salvos.
+
+25. `usuarios.push({ nome, email, senha });`
+    - Adiciona um novo objeto com `nome`, `email` e `senha` ao array de `usuarios`.
+
+26. `localStorage.setItem('usuarios', JSON.stringify(usuarios));`
+    - Salva o array atualizado de `usuarios` no `Local Storage` convertendo-o para uma string JSON.
+
+27. `atualizarTabela();`
+    - Chama a função `atualizarTabela` para exibir o novo usuário na tabela imediatamente após o cadastro.
+
+28. `form.reset();`
+    - Limpa os campos do formulário após o cadastro ser concluído.
+
+29. `});`
+    - Finaliza a definição da função de envio do formulário.
+
+30. `atualizarTabela();`
+    - Chama `atualizarTabela` ao carregar a página para exibir todos os usuários armazenados no `Local Storage` na tabela.
